@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Nosso Próximo Capítulo ❤️</title>
+    
+    <!-- Fontes Modernas, Limpas e Elegantes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ==========================================================================
+           1. IDENTIDADE VISUAL (Midnight Romance / Dark & Cute Premium)
+           ========================================================================== */
+        :root {
+            --bg-dark: #0b0a0d;           /* Preto profundo espaço */
+            --card-bg: rgba(22, 20, 26, 0.65); /* Vidro escuro translúcido */
+            --neon-pink: #ff4a7d;         /* Rosa choque romântico vibrante */
+            --soft-pink: #ff85a2;         /* Rosa fofo para detalhes */
+            --text-pure: #ffffff;         /* Branco puro para leitura */
+            --text-muted: #a09ca6;        /* Cinza arroxeado sutil */
+            --border-glow: rgba(255, 74, 125, 0.15);
+            --transition-bounce: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-dark);
+            height: 100dvh;
+            width: 100vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+            color: var(--text-pure);
+        }
+
+        /* Névoa de Luz Romântica de Fundo */
+        .ambient-glow {
+            position: absolute;
+            width: 130%;
+            height: 130%;
+            top: -15%;
+            left: -15%;
+            z-index: 1;
+            pointer-events: none;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(255, 74, 125, 0.12) 0%, transparent 45%),
+                radial-gradient(circle at 80% 70%, rgba(138, 43, 226, 0.12) 0%, transparent 45%);
+            filter: blur(40px);
+        }
+
+        /* Canvas de Corações Flutuantes */
+        #heartsCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        /* ==========================================================================
+           2. CONTAINER CONTAINER (Visual de App Moderno de Luxo)
+           ========================================================================== */
+        .app-window {
+            width: 100%;
+            height: 100%;
+            background: var(--card-bg);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+            padding: 40px 28px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            transition: var(--transition-smooth);
+        }
+
+        @media (min-width: 480px) {
+            .app-window {
+                width: 390px;
+                height: 844px;
+                border-radius: 40px;
+                box-shadow: 0 30px 70px rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(255,255,255,0.05);
+                border: 1px solid var(--border-glow);
+            }
+        }
+
+        /* Blindagem máxima anti-tela-preta mobile para o container do player */
+        .app-window.fullscreen-video {
+            padding: 0 !important;
+            border: none !important;
+            background: #000000 !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+        }
+
+        .screen {
+            display: none;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition-smooth);
+            transform: scale(0.96) translateY(10px);
+            z-index: 11;
+        }
+
+        .screen.active {
+            display: flex;
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+
+        /* Tipografia de App Premium */
+        .header-badge {
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--soft-pink);
+            margin-bottom: 8px;
+            text-shadow: 0 0 10px rgba(255, 74, 125, 0.3);
+        }
+
+        h1.main-title {
+            font-size: 1.85rem;
+            font-weight: 700;
+            line-height: 1.3;
+            text-align: center;
+            background: linear-gradient(135deg, #ffffff 0%, #ffe5ec 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        p.welcome-text {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            text-align: center;
+            font-weight: 400;
+        }
+
+        /* Botão Interativo com Efeito de Pulso Magnético */
+        .btn-interative {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, var(--neon-pink) 0%, #e0285b 100%);
+            color: var(--text-pure);
+            border: none;
+            border-radius: 18px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: var(--transition-bounce);
+            box-shadow: 0 8px 25px rgba(255, 74, 125, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-interative:active {
+            transform: scale(0.95);
+            box-shadow: 0 4px 10px rgba(255, 74, 125, 0.2);
+        }
+
+        /* ==========================================================================
+           3. NOVO COMPONENTE: AVATAR COM ANIMAÇÃO DE CORAÇÕES EM VOLTA
+           ========================================================================== */
+        .avatar-container {
+            position: relative;
+            width: 160px;
+            height: 160px;
+            margin: 25px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Moldura Circular Premium para a Foto do Casal */
+        .avatar-frame {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid rgba(255, 74, 125, 0.4);
+            box-shadow: 0 0 25px rgba(255, 74, 125, 0.35), inset 0 0 15px rgba(0, 0, 0, 0.6);
+            z-index: 5;
+            position: relative;
+            animation: avatarGentlyPulse 3s ease-in-out infinite alternate;
+        }
+
+        .avatar-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @keyframes avatarGentlyPulse {
+            0% { transform: scale(0.98); border-color: rgba(255, 74, 125, 0.3); box-shadow: 0 0 20px rgba(255, 74, 125, 0.2); }
+            100% { transform: scale(1.03); border-color: rgba(255, 133, 162, 0.7); box-shadow: 0 0 35px rgba(255, 74, 125, 0.5); }
+        }
+
+        /* Anel de Corações Orbitantes/Animados ao Redor */
+        .avatar-heart-ring {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 4;
+        }
+
+        .orbit-heart {
+            position: absolute;
+            font-size: 1.1rem;
+            filter: drop-shadow(0 0 5px rgba(255, 74, 125, 0.6));
+            opacity: 0;
+            animation: floatAroundRing 4s infinite linear;
+        }
+
+        /* Variâncias de tempo e posicionamento dos corações ao redor do avatar */
+        .orbit-heart:nth-child(1) { left: 15%; top: 10%; animation-delay: 0s; font-size: 1.3rem; }
+        .orbit-heart:nth-child(2) { right: 10%; top: 20%; animation-delay: 1s; }
+        .orbit-heart:nth-child(3) { left: 5%; bottom: 25%; animation-delay: 2s; font-size: 1.2rem; }
+        .orbit-heart:nth-child(4) { right: 15%; bottom: 12%; animation-delay: 3s; }
+        .orbit-heart:nth-child(5) { left: 45%; top: -5%; animation-delay: 1.5s; }
+        .orbit-heart:nth-child(6) { left: 45%; bottom: -5%; animation-delay: 2.5s; font-size: 1.4rem; }
+
+        @keyframes floatAroundRing {
+            0% { transform: translateY(10px) scale(0.6) rotate(0deg); opacity: 0; }
+            20% { opacity: 0.9; }
+            80% { opacity: 0.8; }
+            100% { transform: translateY(-25px) scale(1.1) rotate(25deg); opacity: 0; }
+        }
+
+        /* ==========================================================================
+           4. CARD POLAROID DIGITAL DO QUIZ
+           ========================================================================== */
+        .photo-card-frame {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 12px 12px 18px 12px;
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3), 0 0 30px rgba(255, 74, 125, 0.05);
+            width: 85%;
+            max-width: 250px;
+            margin: 0 auto;
+            position: relative;
+            transition: var(--transition-bounce);
+        }
+
+        .photo-card-frame:hover {
+            transform: rotate(-1deg) scale(1.02);
+            border-color: rgba(255, 74, 125, 0.3);
+        }
+
+        .photo-view {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            background: #121115;
+        }
+
+        .photo-view::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(180deg, transparent 60%, rgba(11, 10, 13, 0.4) 100%);
+            pointer-events: none;
+        }
+
+        .photo-element {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.4s var(--transition-smooth), transform 0.6s var(--transition-smooth);
+        }
+
+        .photo-caption {
+            font-size: 0.9rem;
+            color: #ffe5ec;
+            text-align: center;
+            margin-top: 14px;
+            font-weight: 500;
+            letter-spacing: 0.2px;
+        }
+
+        /* Barra de Progresso Arredondada Fofa */
+        .progress-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .progress-track {
+            width: 100%;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--neon-pink), var(--soft-pink));
+            border-radius: 10px;
+            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 0 10px var(--neon-pink);
+        }
+
+        .progress-counter {
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+            color: var(--soft-pink);
+        }
+
+        .question-title {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--text-pure);
+            text-align: center;
+            margin-bottom: 16px;
+            line-height: 1.4;
+        }
+
+        /* Opções de Resposta Modernas em Cápsula */
+        .options-stack {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .option-item {
+            width: 100%;
+            padding: 15px 18px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            font-size: 0.88rem;
+            font-weight: 500;
+            color: #e2dfe5;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .option-item:hover {
+            background: rgba(255, 74, 125, 0.06);
+            border-color: rgba(255, 74, 125, 0.2);
+            transform: translateX(3px);
+            color: var(--text-pure);
+        }
+
+        .option-item.correct {
+            background: rgba(46, 204, 113, 0.15) !important;
+            border-color: #2ecc71 !important;
+            color: #5ef09e !important;
+            font-weight: 600;
+            box-shadow: 0 0 15px rgba(46, 204, 113, 0.1);
+        }
+
+        .option-item.wrong {
+            background: rgba(231, 76, 60, 0.15) !important;
+            border-color: #e74c3c !important;
+            color: #ff7666 !important;
+            animation: dynamicShake 0.4s ease;
+        }
+
+        @keyframes dynamicShake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-5px); }
+            40%, 80% { transform: translateX(5px); }
+        }
+
+        .feedback-hint {
+            font-size: 0.8rem;
+            color: var(--soft-pink);
+            height: 18px;
+            text-align: center;
+            margin-top: 8px;
+            font-weight: 500;
+        }
+
+        /* ==========================================================================
+           5. TELA INTERMEDIÁRIA: CARREGANDO PRESENTE FOFO
+           ========================================================================== */
+        .loading-box {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+            gap: 20px;
+        }
+
+        .gift-bounce-icon {
+            font-size: 4rem;
+            animation: giftJump 1s infinite alternate cubic-bezier(0.25, 1, 0.5, 1);
+            filter: drop-shadow(0 0 20px rgba(255, 74, 125, 0.5));
+        }
+
+        @keyframes giftJump {
+            0% { transform: translateY(0) scale(1) rotate(0deg); }
+            100% { transform: translateY(-20px) scale(1.08) rotate(5deg); }
+        }
+
+        .load-bar-container {
+            width: 70%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.02);
+            position: relative;
+        }
+
+        .load-bar-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #ff4a7d, #ff85a2);
+            border-radius: 20px;
+            box-shadow: 0 0 12px var(--neon-pink);
+        }
+
+        .load-text {
+            font-size: 0.85rem;
+            color: #ffe5ec;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        /* ==========================================================================
+           6. TELA FINAL: VIDEO 9:16 EM TELA CHEIA TOTAL
+           ========================================================================== */
+        .fullscreen-video-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            background: #000000;
+            overflow: hidden;
+        }
+
+        .fullscreen-video-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            background-color: #000000;
+            transform: translateZ(0);
+            -webkit-transform: translateZ(0);
+        }
+
+        .btn-floating-back {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 12px 24px;
+            background: rgba(11, 10, 13, 0.5);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            cursor: pointer;
+            z-index: 1000;
+            transition: var(--transition-smooth);
+            text-transform: uppercase;
+        }
+        
+        .btn-floating-back:active {
+            background: var(--neon-pink);
+            color: #fff;
+            transform: translateX(-50%) scale(0.95);
+        }
+
+        #confettiCanvas {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 999;
+            pointer-events: none;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Música Romântica de Fundo Oculta -->
+    <audio id="bgMusic" loop src="musica-fundo.mp3"></audio>
+
+    <canvas id="confettiCanvas"></canvas>
+    <!-- Elementos dinâmicos do plano de fundo -->
+    <div class="ambient-glow"></div>
+    <canvas id="heartsCanvas"></canvas>
+
+    <div class="app-window" id="mainContainer">
+        
+        <!-- TELA 1: TELA DE ENTRADA ATUALIZADA COM FOTO DO CASAL -->
+        <div class="screen active" id="startScreen">
+            <div style="text-align: center; margin-top: 15px;">
+                <div class="header-badge">Love Quiz</div>
+                <h1 class="main-title">Joguinho valendo presente</h1>
+            </div>
+            
+            <!-- Bloco de Avatar com Corações Animados ao Redor -->
+            <div class="avatar-container">
+                <div class="avatar-frame">
+                    <!-- Substitua 'sua-foto-aqui.jpg' pelo arquivo real da foto de vocês -->
+                    <img src="nos.jpeg" alt="Foto do Casal">
+                </div>
+                <div class="avatar-heart-ring">
+                    <span class="orbit-heart">❤️</span>
+                    <span class="orbit-heart">💖</span>
+                    <span class="orbit-heart">❤️</span>
+                    <span class="orbit-heart">💕</span>
+                    <span class="orbit-heart">💗</span>
+                    <span class="orbit-heart">❤️</span>
+                </div>
+            </div>
+            
+            <div style="width: 100%;">
+                <p class="welcome-text" style="margin-bottom: 35px;">
+                    HIHIHI Raquelis!! Será que sua memória tá em dia?? Preparei algumas perguntas sobre nós dois valendo um presentinho no final, tá bom?
+                </p>
+                <button class="btn-interative" onclick="startQuiz()">
+                    <span>Começar o Jogo</span> <span>✨</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- TELA 2: O JOGO / LEMBRANÇAS -->
+        <div class="screen" id="quizScreen">
+            <div class="progress-container">
+                <div class="progress-track">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="progress-counter" id="progressCounter">Lembrança 1 de 4</div>
+            </div>
+
+            <div class="photo-card-frame" id="photoFrame">
+                <div class="photo-view">
+                    <img src="" alt="Momento Nosso" class="photo-element" id="photoAsset">
+                </div>
+                <div class="photo-caption" id="photoNote">❤️</div>
+            </div>
+
+            <div style="width: 100%;">
+                <h3 class="question-title" id="questionText">Carregando pergunta...</h3>
+                <div class="options-stack" id="optionsContainer"></div>
+                <div class="feedback-hint" id="feedbackHint"></div>
+            </div>
+        </div>
+
+        <!-- TELA 3: TRANSIÇÃO FOFA CARREGANDO PRESENTE -->
+        <div class="screen" id="loadingScreen">
+            <div class="loading-box">
+                <div class="gift-bounce-icon">🎁</div>
+                <div class="load-text" id="loadText">Desbloqueando sua surpresa...</div>
+                <div class="load-bar-container">
+                    <div class="load-bar-fill" id="loadBarFill"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TELA 4: TELA FINAL DO PRÊMIO (VÍDEO 9:16 TELA CHEIA COM AUTOPLAY) -->
+        <div class="screen" id="finalScreen">
+            <div class="fullscreen-video-container">
+                <video id="proposalVideo" playsinline autoplay muted loop>
+                    <source src="video v1 - cresce e florece.mp4" type="video/mp4">
+                    Seu navegador não suporta a exibição de vídeos.
+                </video>
+                <button class="btn-floating-back" onclick="restartToStart()">
+                    ↺ Reiniciar
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- MOTOR LÓGICO DO APP & ANIMAÇÕES -->
+    <script>
+        const quizData = [
+            {
+                question: "Onde tivemos a conversa que mudou tudo?",
+                options: ["No Palmas Shopping", "Na Igreja", "Pelo whatsapp", "No Chiquinho"],
+                correct: 3, 
+                note: "Aquela conversa meio tensa...",
+                img: "conversa.jpeg"
+            },
+            {
+                question: "Qual lugar a gente mais vai pra comer juntos?",
+                options: ["Guru", "Qx","Palmas Shopping", "Capim dourado"],
+                correct: 2, 
+                note: "Parece que a gente só come lá kkkkk",
+                img: "comer.jpeg"
+            },
+            {
+                question: "Quem mandou a primeira mensagem para o outro?",
+                options: ["Raquelis, pq não aguentou o charme do guitarrista", "Micaelis, pq tava doido na Raquelis", "Nós mandamos quase juntos por destino", "Fomos apresentados por amigos"],
+                correct: 1,
+                note: "Alguém falou de escola biblíca só pra puxar assunto kkkkk 😉",
+                img: "mensagem.jpeg"
+            },
+            {
+                question: "Quem falou 'eu te amo' primeiro ?",
+                options: ["Raquelis", "Micaelis", "Ninguém falou ainda", "Ficamos com vergonha e falamos juntos"],
+                correct: 0,
+                note: "Um falou primeiro, mas o outro tava doido pra falar também kkkkk",
+                img: "amo.jpeg"
+            },
+            
+        ];
+
+        let currentQuestion = 0;
+        let audioCtx = null;
+
+        function initAudioContext() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+        }
+
+        function playSoundFx(type) {
+            initAudioContext();
+            if (!audioCtx) return;
+
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+
+            const now = audioCtx.currentTime;
+
+            if (type === 'correct') {
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(587.33, now); 
+                osc.frequency.exponentialRampToValueAtTime(880, now + 0.1); 
+                gain.gain.setValueAtTime(0.3, now);
+                gain.gain.exponentialRampToValueAtTime(0.01, now + 0.4);
+                osc.start(now);
+                osc.stop(now + 0.4);
+            } else if (type === 'wrong') {
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(180, now);
+                osc.frequency.linearRampToValueAtTime(130, now + 0.2);
+                gain.gain.setValueAtTime(0.4, now);
+                gain.gain.exponentialRampToValueAtTime(0.01, now + 0.25);
+                osc.start(now);
+                osc.stop(now + 0.25);
+            }
+        }
+
+        // --- PLANO DE FUNDO: CANVAS DE CORAÇÕES FLUTUANTES ---
+        const heartsCanvas = document.getElementById('heartsCanvas');
+        const hctx = heartsCanvas.getContext('2d');
+        let heartParticles = [];
+
+        function resizeHeartsCanvas() {
+            heartsCanvas.width = window.innerWidth;
+            heartsCanvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeHeartsCanvas);
+        resizeHeartsCanvas();
+
+        function createHeartParticle(isExplosion = false, x = null, y = null) {
+            return {
+                x: x !== null ? x : Math.random() * heartsCanvas.width,
+                y: y !== null ? y : (isExplosion ? y : heartsCanvas.height + 20),
+                size: Math.random() * 8 + (isExplosion ? 7 : 4),
+                speedY: isExplosion ? (Math.random() * 7 - 3.5) : -(Math.random() * 1.5 + 0.8),
+                speedX: isExplosion ? (Math.random() * 7 - 3.5) : (Math.sin(Math.random() * 2) * 0.4),
+                opacity: Math.random() * 0.4 + 0.3,
+                color: ['#ff4a7d', '#ff85a2', '#ff0044', '#ffb3c6'][Math.floor(Math.random() * 4)],
+                tilt: Math.random() * 20
+            };
+        }
+
+        function spawnAmbientHearts() {
+            if (heartParticles.length < 35) {
+                heartParticles.push(createHeartParticle(false));
+            }
+        }
+        setInterval(spawnAmbientHearts, 300);
+
+        function drawHeart(ctx, x, y, size, color, opacity) {
+            ctx.save();
+            ctx.globalAlpha = opacity;
+            ctx.fillStyle = color;
+            ctx.beginPath();
+            ctx.moveTo(x, y + size / 4);
+            ctx.quadraticCurveTo(x, y, x + size / 2, y);
+            ctx.quadraticCurveTo(x + size, y, x + size, y + size / 3);
+            ctx.quadraticCurveTo(x + size, y + size * 2 / 3, x + size / 2, y + size);
+            ctx.quadraticCurveTo(x, y + size * 2 / 3, x, y + size / 3);
+            ctx.quadraticCurveTo(x, y, x, y + size / 4);
+            ctx.closePath();
+            ctx.fill();
+            ctx.restore();
+        }
+
+        function updateAndDrawHearts() {
+            hctx.clearRect(0, 0, heartsCanvas.width, heartsCanvas.height);
+            for (let i = heartParticles.length - 1; i >= 0; i--) {
+                let p = heartParticles[i];
+                p.y += p.speedY;
+                p.x += p.speedX;
+                
+                drawHeart(hctx, p.x, p.y, p.size, p.color, p.opacity);
+
+                if (p.y < -30 || p.x < -30 || p.x > heartsCanvas.width + 30) {
+                    heartParticles.splice(i, 1);
+                }
+            }
+            requestAnimationFrame(updateAndDrawHearts);
+        }
+        requestAnimationFrame(updateAndDrawHearts);
+
+        function triggerHeartExplosion() {
+            const centerX = heartsCanvas.width / 2;
+            const centerY = heartsCanvas.height / 2;
+            for (let i = 0; i < 45; i++) {
+                heartParticles.push(createHeartParticle(true, centerX, centerY));
+            }
+        }
+
+        // --- ENGENHARIA DO QUIZ ---
+        function startQuiz() {
+            initAudioContext();
+            const bgMusic = document.getElementById('bgMusic');
+            bgMusic.volume = 0.4;
+            bgMusic.play().catch(e => console.log("Música aguardando interação.", e));
+
+            document.getElementById('startScreen').classList.remove('active');
+            document.getElementById('quizScreen').classList.add('active');
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            const data = quizData[currentQuestion];
+            
+            document.getElementById('progressFill').style.width = ((currentQuestion + 1) / quizData.length) * 100 + '%';
+            document.getElementById('progressCounter').innerText = `Lembrança ${currentQuestion + 1} de ${quizData.length}`;
+            document.getElementById('questionText').innerText = data.question;
+            document.getElementById('photoNote').innerText = data.note;
+            
+            const imgElement = document.getElementById('photoAsset');
+            imgElement.style.opacity = '0.2';
+            imgElement.style.transform = 'scale(1.1)';
+            
+            if(data.img) {
+                imgElement.src = data.img;
+                imgElement.onload = () => { 
+                    imgElement.style.opacity = '1'; 
+                    imgElement.style.transform = 'scale(1)';
+                };
+            }
+            
+            const container = document.getElementById('optionsContainer');
+            container.innerHTML = '';
+            document.getElementById('feedbackHint').innerText = '';
+
+            data.options.forEach((option, index) => {
+                const btn = document.createElement('button');
+                btn.className = 'option-item';
+                btn.innerText = option;
+                btn.onclick = () => checkAnswer(index, btn);
+                container.appendChild(btn);
+            });
+        }
+
+        function checkAnswer(selectedIndex, clickedBtn) {
+            const correctIndex = quizData[currentQuestion].correct;
+            const buttons = document.querySelectorAll('.option-item');
+
+            buttons.forEach(b => b.removeAttribute('onclick'));
+
+            if(selectedIndex === correctIndex) {
+                clickedBtn.classList.add('correct');
+                playSoundFx('correct');
+                triggerHeartExplosion();
+                
+                setTimeout(() => {
+                    currentQuestion++;
+                    if(currentQuestion < quizData.length) {
+                        loadQuestion();
+                    } else {
+                        document.getElementById('quizScreen').classList.remove('active');
+                        document.getElementById('loadingScreen').classList.add('active');
+                        runGiftLoading();
+                    }
+                }, 850);
+            } else {
+                clickedBtn.classList.add('wrong');
+                playSoundFx('wrong');
+                document.getElementById('feedbackHint').innerText = "Eu sei que você sabe! Pensa direitinho... 🥰";
+                setTimeout(() => {
+                    loadQuestion();
+                }, 1300);
+            }
+        }
+
+        // --- SISTEMA INTERMEDIÁRIO DE CARREGAMENTO DO PRESENTE ---
+        function runGiftLoading() {
+            const bar = document.getElementById('loadBarFill');
+            const txt = document.getElementById('loadText');
+            let progress = 0;
+            
+            const phrases = [
+                "Preparando sua surpresa...",
+                "Quase lá, abrindo o laço...",
+                "Prontinho! Amor carregado com sucesso ❤️"
+            ];
+
+            const interval = setInterval(() => {
+                progress += 2;
+                bar.style.width = progress + '%';
+                
+                if(progress % 20 === 0) {
+                    triggerHeartExplosion();
+                }
+
+                if(progress === 34) txt.innerText = phrases[1];
+                if(progress === 76) txt.innerText = phrases[2];
+
+                if(progress >= 100) {
+                    clearInterval(interval);
+                    
+                    setTimeout(() => {
+                        const bgMusic = document.getElementById('bgMusic');
+                        bgMusic.pause();
+
+                        document.getElementById('loadingScreen').classList.remove('active');
+                        
+                        const appWin = document.getElementById('mainContainer');
+                        appWin.classList.add('fullscreen-video'); 
+                        
+                        document.getElementById('finalScreen').classList.add('active');
+                        
+                        const video = document.getElementById('proposalVideo');
+                        video.muted = false; 
+                        video.volume = 1.0;
+                        video.play().catch(error => {
+                            console.log("Autoplay de vídeo bloqueado.", error);
+                        });
+
+                        const canvas = document.getElementById('confettiCanvas');
+                        canvas.style.display = 'block';
+                        initLuxuryConfetti();
+                    }, 800);
+                }
+            }, 60);
+        }
+
+        function restartToStart() {
+            currentQuestion = 0;
+            const video = document.getElementById('proposalVideo');
+            video.pause();
+            video.currentTime = 0;
+            
+            const bgMusic = document.getElementById('bgMusic');
+            bgMusic.currentTime = 0;
+            bgMusic.play().catch(e => console.log(e));
+
+            const appWin = document.getElementById('mainContainer');
+            appWin.classList.remove('fullscreen-video'); 
+            
+            document.getElementById('finalScreen').classList.remove('active');
+            document.getElementById('startScreen').classList.add('active');
+            document.getElementById('confettiCanvas').style.display = 'none';
+            document.getElementById('loadBarFill').style.width = '0%';
+        }
+
+        // --- SISTEMA DE CONFETES LUXUOSOS ---
+        function initLuxuryConfetti() {
+            const canvas = document.getElementById('confettiCanvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            
+            let pieces = [];
+            const colors = ['#ff4a7d', '#ff85a2', '#ffffff', '#8a2be2'];
+            let globalOpacity = 1;      
+            let stopSpawning = false;   
+
+            for (let i = 0; i < 65; i++) {
+                pieces.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height - canvas.height,
+                    r: Math.random() * 4 + 2,
+                    d: Math.random() * canvas.height,
+                    colorStr: colors[Math.floor(Math.random() * colors.length)],
+                    tilt: Math.random() * 4 - 2
+                });
+            }
+            
+            setTimeout(() => {
+                stopSpawning = true;
+            }, 4000);
+
+            function draw() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.save();
+                ctx.globalAlpha = globalOpacity;
+                
+                pieces.forEach((p) => {
+                    ctx.beginPath();
+                    ctx.lineWidth = p.r;
+                    ctx.strokeStyle = p.colorStr;
+                    ctx.moveTo(p.x + p.tilt + p.r/2, p.y);
+                    ctx.lineTo(p.x + p.tilt, p.y + p.tilt + p.r/2);
+                    ctx.stroke();
+                });
+                ctx.restore();
+                update();
+            }
+            
+            function update() {
+                pieces.forEach((p) => {
+                    p.y += Math.cos(p.d) + 1.8 + p.r / 3;
+                    p.tilt = Math.sin(p.d - p.r);
+                    
+                    if (p.y > canvas.height) {
+                        if (!stopSpawning) {
+                            p.y = -20;
+                            p.x = Math.random() * canvas.width;
+                        }
+                    }
+                });
+
+                if (stopSpawning) {
+                    globalOpacity -= 0.012; 
+                    if (globalOpacity <= 0) {
+                        globalOpacity = 0;
+                        canvas.style.display = 'none';
+                        return; 
+                    }
+                }
+                requestAnimationFrame(draw);
+            }
+            requestAnimationFrame(draw);
+        }
+    </script>
+</body>
+</html>
